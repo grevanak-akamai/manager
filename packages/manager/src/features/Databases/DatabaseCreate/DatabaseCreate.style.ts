@@ -1,5 +1,6 @@
 import { Autocomplete, Box, Button, TextField, Typography } from '@linode/ui';
 import { Grid, styled } from '@mui/material';
+import { TextFieldElement } from 'akam-web-components-react/text-field';
 
 import { PlansPanel } from 'src/features/components/PlansPanel/PlansPanel';
 
@@ -14,7 +15,7 @@ export const StyledLabelTooltip = styled(Box, {
   },
 }));
 
-export const StyledTextField = styled(TextField, {
+export const StyledTextField = styled(TextFieldElement, {
   label: 'StyledTextField',
 })(({ theme }) => ({
   '& .MuiTooltip-tooltip': {
@@ -22,6 +23,7 @@ export const StyledTextField = styled(TextField, {
       minWidth: 350,
     },
   },
+  width: 410,
 }));
 
 export const StyledEngineSelect = styled(Autocomplete, {

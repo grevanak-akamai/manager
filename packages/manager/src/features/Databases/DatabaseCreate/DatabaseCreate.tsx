@@ -51,6 +51,7 @@ import type { APIError } from '@linode/api-v4/lib/types';
 import type { PlanSelectionWithDatabaseType } from 'src/features/components/PlansPanel/types';
 import type { DatabaseCreateValues } from 'src/features/Databases/DatabaseCreate/DatabaseClusterData';
 import type { ExtendedIP } from 'src/utilities/ipUtils';
+import { ButtonElement } from 'akam-web-components-react/button';
 
 const DatabaseCreate = () => {
   const history = useHistory();
@@ -369,14 +370,13 @@ const DatabaseCreate = () => {
           Your database node(s) will take approximately 15-30 minutes to
           provision.
         </StyledTypography>
-        <StyledCreateBtn
-          buttonType="primary"
+        <ButtonElement
+          type="primary"
           disabled={isRestricted}
           loading={isSubmitting}
-          type="submit"
         >
           Create Database Cluster
-        </StyledCreateBtn>
+        </ButtonElement>
       </StyledBtnCtn>
       {isDatabasesV2Enabled && <DatabaseLogo />}
     </form>

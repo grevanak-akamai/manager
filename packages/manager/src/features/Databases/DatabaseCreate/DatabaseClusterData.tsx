@@ -67,6 +67,17 @@ export const DatabaseClusterData = (props: Props) => {
     <>
       <Grid>
         <Typography variant="h2">Name Your Cluster</Typography>
+        <Typography
+          style={{
+            color: '#696970',
+            fontSize: '0.875rem',
+            paddingBottom: '4px',
+            paddingTop: '10px',
+          }}
+          variant="h3"
+        >
+          Cluster label
+        </Typography>
         <StyledTextField
           data-qa-label-input
           disabled={isRestricted}
