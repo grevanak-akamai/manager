@@ -15,6 +15,7 @@ pipeline {
                 sh "npm -v"
                 sh "pnpm -v || corepack enable pnpm"
                 sh "pnpm install:all"
+                sh "pnpm build"
               }
             }
         }
