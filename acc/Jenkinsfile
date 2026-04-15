@@ -22,7 +22,7 @@ pipeline {
 
         stage("Scan") {
             steps {
-                pulsarBlackduck(bdApplicationId: "cloud-manager", buildType: "FREESTYLE")
+                pulsarBlackduck(bdApplicationId: "cloud-manager", buildType: "FRONTEND")
                 pulsarSonar(jobType: "FREESTYLE", projectName: "cloud-manager", customSrc: true)
             }
         }
