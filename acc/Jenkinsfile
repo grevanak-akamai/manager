@@ -1,8 +1,6 @@
 pipeline {
-    // Run on fee when available; fall back to cloud-focal so PRs don’t stall if the fee pool
-    // has no executors yet (see DevOps / capacity for the fee label).
     agent {
-        label "fee || cloud-focal"
+        label "fee"
     }
 
     options {
