@@ -222,19 +222,9 @@ pipeline {
                 def xmlFiles = findFiles(glob: 'reports/vitest-junit*.xml')
                 def summary = ''
                 if (xmlFiles.length > 0) {
-                    summary = sh(returnStdout: true, script: '''
-                        python3 -c "
-import glob, xml.etree.ElementTree as ET
-tests=failures=0
-for f in glob.glob('reports/vitest-junit*.xml'):
-    root = ET.parse(f).getroot()
-    for ts in ([root] if root.tag == 'testsuite' else root.findall('testsuite')):
-        tests += int(ts.get('tests', 0))
-        failures += int(ts.get('failures', 0))
-icon = chr(10003) if failures == 0 else chr(10007)
-print(f'{icon} {tests - failures} passed, {failures} failed')
-"
-                    ''').trim()
+                    // Single-line Python — avoids indented blocks that Jenkins
+                    // whitespace-stripping would break (IndentationError).
+                    summary = sh(returnStdout: true, script: '''python3 -c "import glob,xml.etree.ElementTree as ET; pairs=[(int(ts.get('tests',0)),int(ts.get('failures',0))) for f in glob.glob('reports/vitest-junit*.xml') for root in [ET.parse(f).getroot()] for ts in ([root] if root.tag=='testsuite' else root.findall('testsuite'))]; t,e=sum(p[0] for p in pairs),sum(p[1] for p in pairs); print(chr(10003 if e==0 else 10007),t-e,'passed,',e,'failed')"''').trim()
                     if (summary) {
                         currentBuild.description = summary
                     }
